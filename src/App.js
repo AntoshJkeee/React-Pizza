@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import {Header} from './components'
 import {Cart, Home} from './pages'
 import {Route, Routes} from "react-router-dom";
@@ -8,9 +10,10 @@ function App() {
 
 
     useEffect(() => {
-        fetch('http://localhost:3000/db.json').then(response => response.json()).then(response => {
-            setPizzas(response.pizzas)
+        axios.get('http://localhost:3000/db.json').then(({data}) => {
+            setPizzas((data.pizzas))
         })
+
     }, [])
 
     return (

@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import classNames from "classnames";
+import PropTypes from 'prop-types'
 
 function PizzaBlock({name, imageUrl, price, types, sizes}) {
+
     const availableTypes = ['тонкое', 'традиционное'];
     const availableSize = [26, 30, 40]
     const [activeType, setActiveType] = useState(types[0]);
@@ -46,7 +48,7 @@ function PizzaBlock({name, imageUrl, price, types, sizes}) {
                                 active: activeSize === index,
                                 disabled: !sizes.includes(size),
                             })}>
-                            {size} см
+                            {size} см.
                         </li>
                     ))}
                 </ul>
@@ -72,6 +74,14 @@ function PizzaBlock({name, imageUrl, price, types, sizes}) {
             </div>
         </div>
     );
+}
+
+PizzaBlock.propTypes = {
+    name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    types: PropTypes.arrayOf(PropTypes.number).isRequired,
+    sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default PizzaBlock;

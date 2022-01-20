@@ -12,7 +12,7 @@ function Home({items}) {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    items.map((element, index) => (
+                    items.map((element) => (
                         <PizzaBlock key={element.id} {...element} />
                     ))
                 }
