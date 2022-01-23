@@ -4,11 +4,9 @@ import {Header} from './components'
 import {Cart, Home} from './pages'
 import {Route, Routes} from "react-router-dom";
 import {useEffect, useState} from "react";
+import { connect } from "react-redux";
 
 function App() {
-    const [pizzas, setPizzas] = useState([])
-
-
     useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
             setPizzas((data.pizzas))
@@ -29,4 +27,4 @@ function App() {
     );
 }
 
-export default App;
+export default connect()(App);
