@@ -7,8 +7,7 @@ import {useEffect} from "react";
 
 // redux
 import { connect } from "react-redux";
-import store from "./redux/store";
-import { setPizzas } from "./redux/actions/pizzas";
+import { setPizzas as setPizzasAction } from "./redux/actions/pizzas";
 
 function App(props) {
     const { items } = props
@@ -17,7 +16,7 @@ function App(props) {
 
     useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
-            window.store.dispatch(setPizzas(data.pizzas))
+            props.setPizzas(data.pizzas)
         })
 
     }, [])
@@ -41,4 +40,11 @@ const mapStateToProps = state => {
    }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        setPizzas: (items) => dispatch(setPizzasAction(items)),
+        dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
