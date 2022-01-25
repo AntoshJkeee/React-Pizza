@@ -1,50 +1,39 @@
-import axios from "axios";
-
+import React from "react";
 import {Header} from './components'
 import {Cart, Home} from './pages'
 import {Route, Routes} from "react-router-dom";
-import {useEffect} from "react";
+
+// packages
+import axios from "axios";
 
 // redux
-import { connect } from "react-redux";
-import { setPizzas as setPizzasAction } from "./redux/actions/pizzas";
-
-function App(props) {
-    const { items } = props
+import { useDispatch } from "react-redux";
+import { setPizzas } from "./redux/actions/pizzas";
 
 
 
-    useEffect(() => {
+
+function App() {
+    const dispatch = useDispatch(); // создаем хук который создает диспатч из редакса
+
+    React.useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
-            props.setPizzas(data.pizzas)
+            dispatch(setPizzas(data.pizzas));
         })
 
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="wrapper">
             <Header/>
             <div className="content">
                 <Routes>
-                    <Route path="/" element={<Home items={ items }/>}/>
-                    <Route path="/cart" element={<Cart/>}/>
+                    <Route path="/" element={ <Home /> }/>
+                    <Route path="/cart" element={ <Cart/> }/>
                 </Routes>
             </div>
         </div>
     );
 }
 
-const mapStateToProps = state => {
-   return {
-       items: state.pizzas.items
-   }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setPizzas: (items) => dispatch(setPizzasAction(items)),
-        dispatch
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
