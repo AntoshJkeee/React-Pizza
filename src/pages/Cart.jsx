@@ -24,11 +24,11 @@ function Cart() {
     }
 
     const onPlusItem = (id) => {
-        dispatch(plusCartItem())
+        dispatch(plusCartItem(id))
     }
 
     const onMinusItem = (id) => {
-        dispatch(minusCartItem())
+        dispatch(minusCartItem(id))
     }
 
     return (
@@ -75,6 +75,9 @@ function Cart() {
                                     totalPrice={items[obj.id].totalPrice}
                                     totalCount={items[obj.id].items.length}
                                     onRemove={onRemoveItem}
+                                    onMinus={onMinusItem}
+                                    onPlus={onPlusItem}
+                                    key={`${obj.id}_${obj.name}`}
                                     id={obj.id}
                                     name={obj.name}
                                     type={obj.type}
@@ -101,7 +104,7 @@ function Cart() {
                                 </div>
                             </div>
                         </div>
-                    </div> : <div className="cart cart--empty"><h2>Корзина пустая <icon>😕</icon></h2>
+                    </div> : <div className="cart cart--empty"><h2>Корзина пустая</h2>
                         <p>
                             Вероятней всего, вы не выбрали пиццу.<br/>
                             Для того, чтобы это сделать, перейдите на главную страницу.
