@@ -20,8 +20,6 @@ function Home() {
     const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded)
     const {category, sortBy} = useSelector(({filters}) => filters)
 
-    console.log(cartItems)
-
     useEffect(() => {
         dispatch(fetchPizzas(sortBy, category))
         // eslint-disable-next-line
@@ -54,7 +52,7 @@ function Home() {
                 { isLoaded ? items.map((element) => (<PizzaBlock
                     onClickAddPizza={handleAddPizzaToCart}
                     key={element.id}
-                    addedCount={cartItems[element.id] && cartItems[element.id].length} {...element} />)) : Array(12).fill(0).map((_, index) => <PizzaLoadingBlock key={index}/>) }
+                    addedCount={cartItems[element.id] && cartItems[element.id].items.length} {...element} />)) : Array(12).fill(0).map((_, index) => <PizzaLoadingBlock key={index}/>) }
             </div>
         </div>
     );
