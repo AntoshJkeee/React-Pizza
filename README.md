@@ -1,4 +1,6 @@
-# Hey! 
+# Hey Everyone! 
+
+![alt text](screenshots/screen.jpg "main-screen")
 
 - To install all required packages, write the command `npm i`
 

@@ -6,6 +6,7 @@ import Button from "../Button";
 function PizzaBlock({id, name, imageUrl, price, types, sizes, onClickAddPizza, addedCount}) {
 
     const availableTypes = ['тонкое', 'традиционное'];
+    const test = []
     const availableSize = [26, 30, 40]
     const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(0);
